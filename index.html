@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+        .hero{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh;
+            background: #000;
+            color:#fff;
+           
+        }
+        .characters-wrapper{
+            display:inherit;
+            justify-content: space-between;
+            max-width: 90%;
+            margin:50px auto 50px;
+            flex-wrap: wrap;
+        }
+        .character{
+            
+            display: flex;
+            flex-direction: column;
+            padding:20px;
+            box-shadow: #e8e9ea 0px 0px 20px 1px;
+            margin: 20px;
+            flex:1 1 auto;
+        }
+        .character-image-wrapper{
+            width: 100%;
+        }
+        .character-image-wrapper img{
+            width: 100%;
+        }
+        .character-bio{
+            padding:0 15px;
+        }
+        .load-more-wrapper{
+            width:100%;
+            display: inherit;
+            justify-content: center;
+            margin:40px 0px;
+        }
+        .load-more-wrapper button[type="button"]{
+            border: 1px solid #000;
+            color: #fff;
+            background: #000;
+            font-size: 1.5em;
+            padding: 10px 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Rick & Morty API</h1>
+        </div>  
+        <div class="characters-wrapper">
+            
+        </div>
+        <div class="load-more-wrapper">
+            <button type="button" class="btn" id="load-more">Load More</button>
+        </div>
+    </div>
+</body>
+<script>
+    const stringToHTML = (s) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(s, "text/html");
+        return doc.body.firstChild;
+    };
+    const showCard = (character) =>{
+
+        const { name, id, image } = character;
+
+        let template = `
+            <div class="character" data-id="${id}">
+                <div class="character-image-wrapper">
+                    <img src="${image}" alt="${name}">
+                </div>
+                <div class="character-bio">
+                    <h3>${name}</h3>
+                    <p>${id}</p>
+                </div>
+            </div>
+        `
+        renderedCharacter =  stringToHTML(template);
+        renderedCharacter.addEventListener('click',function(){
+           
+        })
+        return renderedCharacter;
+        
+    }
+    window.onload = () =>{
+        const URL = 'https://rickandmortyapi.com/api/character/'
+        fetch(URL)
+            .then( res => res.json())
+            .then( characters => {
+                characters.results.map( character => { 
+                    const charactersList = document.querySelector('.characters-wrapper')
+                    let renderedCharacters = showCard(character);
+                    
+                    charactersList.appendChild(renderedCharacters)
+                })
+            })
+    }
+</script>
+</html>
