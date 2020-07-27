@@ -1,5 +1,3 @@
-const URL = 'https://rickandmortyapi.com/api/character/';
-
 const stringToHTML = (s) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(s, "text/html");
@@ -61,15 +59,28 @@ const showCard = (character) => {
     })
     return renderedCharacter;
 }
-window.onload = () => {
+const getData = URL => {
     fetch(URL)
         .then(res => res.json())
         .then(characters => {
+            if(characters.info.next){
+                document.getElementById('load-more').setAttribute('data-next-url',characters.info.next);
+                document.getElementById('load-more').removeAttribute('disabled')
+            }
             characters.results.map(character => {
                 const charactersList = document.querySelector('.characters-wrapper')
                 let renderedCharacters = showCard(character);
+                charactersList.appendChild(renderedCharacters);
 
-                charactersList.appendChild(renderedCharacters)
             })
         })
+}
+window.onload = () => {
+    const URL = 'https://rickandmortyapi.com/api/character/';
+    getData(URL);
+    document.getElementById('load-more').addEventListener('click',function(){
+        let URL = this.dataset.nextUrl;
+        getData(URL);
+        this.setAttribute('disabled','disabled');
+    })
 }
