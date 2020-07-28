@@ -6,14 +6,11 @@ const stringToHTML = (s) => {
 const addEvents = (selector, id) => {
     document.querySelector('body').appendChild(selector);
     selector.style.display = 'block';
-    const span = document.getElementById(`close-${id}`);
     window.onclick = function (event) {
-        if (event.target === selector) {
+        if(event.target === selector || event.target.id === `close-${id}` ){
             selector.style.display = "none";
+            document.querySelector('body').removeChild(selector);
         }
-    }
-    span.onclick = function () {
-        selector.style.display = "none";
     }
 }
 const showModal = (character) => {
@@ -38,6 +35,7 @@ const showModal = (character) => {
     </div>
     `;
     renderedModal = stringToHTML(template);
+
     addEvents(renderedModal, id)
 
 }

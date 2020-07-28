@@ -29,7 +29,6 @@ body{
 .character{
     display: flex;
     flex-direction: column;
-    padding:20px;
     box-shadow: #e8e9ea 0px 0px 20px 1px;
     margin: 20px;
     flex:1 1 auto;
@@ -121,9 +120,14 @@ body{
 @media screen and (max-width:768px){
     .modal-content {
         padding:20px;
+        max-width: 80%;
     }
+    .modal-image{
+      margin-right: 0;
+  }
     .modal-body{
         flex-direction: column;
+        margin-top:20px;
     }
 }
 .loading,
