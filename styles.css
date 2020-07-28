@@ -121,9 +121,14 @@ body{
 @media screen and (max-width:768px){
     .modal-content {
         padding:20px;
+        max-width: 90%;
     }
+    .modal-image{
+      margin-right: 0;
+  }
     .modal-body{
         flex-direction: column;
+        margin-top:20px;
     }
 }
 .loading,
