@@ -44,7 +44,7 @@ const showModal = (character) => {
 const showCard = (character) => {
     const { name, id, image } = character;
     let template = `
-        <div class="character" data-id="${id}">
+        <div class="character fade-in" data-id="${id}">
             <div class="character-image-wrapper">
                 <img src="${image}" alt="${name}">
             </div>
@@ -60,9 +60,12 @@ const showCard = (character) => {
     return renderedCharacter;
 }
 const getData = URL => {
+    const loading = document.querySelector('.loading');
+    loading.style.display = 'block';
     fetch(URL)
         .then(res => res.json())
         .then(characters => {
+            loading.style.display = 'none';
             if(characters.info.next){
                 document.getElementById('load-more').setAttribute('data-next-url',characters.info.next);
                 document.getElementById('load-more').removeAttribute('disabled')
