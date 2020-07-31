@@ -5,11 +5,10 @@ const stringToHTML = (s) => {
 };
 const addEvents = (selector, id) => {
     document.querySelector('body').appendChild(selector);
-    selector.style.display = 'block';
     window.onclick = function (event) {
-        if(event.target === selector || event.target.id === `close-${id}` ){
-            selector.style.display = "none";
-            document.querySelector('body').removeChild(selector);
+        if (event.target === selector || event.target.id === `close-${id}`) {
+            selector.querySelector('.modal-content').style.animationName = 'animatetopOut'
+            setTimeout(() => { document.querySelector('body').removeChild(selector); }, 200);
         }
     }
 }
@@ -35,9 +34,7 @@ const showModal = (character) => {
     </div>
     `;
     renderedModal = stringToHTML(template);
-
     addEvents(renderedModal, id)
-
 }
 const showCard = (character) => {
     const { name, id, image } = character;
@@ -64,8 +61,8 @@ const getData = URL => {
         .then(res => res.json())
         .then(characters => {
             loading.style.display = 'none';
-            if(characters.info.next){
-                document.getElementById('load-more').setAttribute('data-next-url',characters.info.next);
+            if (characters.info.next) {
+                document.getElementById('load-more').setAttribute('data-next-url', characters.info.next);
                 document.getElementById('load-more').removeAttribute('disabled')
             }
             characters.results.map(character => {
@@ -79,9 +76,9 @@ const getData = URL => {
 window.onload = () => {
     const URL = 'https://rickandmortyapi.com/api/character/';
     getData(URL);
-    document.getElementById('load-more').addEventListener('click',function(){
+    document.getElementById('load-more').addEventListener('click', function () {
         let URL = this.dataset.nextUrl;
         getData(URL);
-        this.setAttribute('disabled','disabled');
+        this.setAttribute('disabled', 'disabled');
     })
 }

@@ -1,106 +1,143 @@
-body{
-    margin:0;
-    padding:0;
-    background: #fff;
-    font-family: Arial, Helvetica, sans-serif;
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.container{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
-.hero{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20vh;
-    background: #000;
-    color:#fff;
-   
+
+.hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  background: #000;
+  color: #fff;
 }
-.characters-wrapper{
-    display:inherit;
-    justify-content: space-between;
-    padding:20px 40px;
-    flex-wrap: wrap;
-    
+
+.characters-wrapper {
+  display: inherit;
+  justify-content: space-between;
+  padding: 20px 40px;
+  flex-wrap: wrap;
 }
-.character{
-    display: flex;
-    flex-direction: column;
-    box-shadow: #e8e9ea 0px 0px 20px 1px;
-    margin: 20px;
-    flex:1 1 auto;
-    cursor: pointer;
-   
+
+.character {
+  display: flex;
+  flex-direction: column;
+  box-shadow: #e8e9ea 0px 0px 20px 1px;
+  margin: 20px;
+  flex: 1 1 auto;
+  cursor: pointer;
 }
-.character-image-wrapper{
-    width: 100%;
+
+.character-image-wrapper {
+  width: 100%;
 }
-.character-image-wrapper img{
-    width: 100%;
+
+.character-image-wrapper img {
+  width: 100%;
 }
-.character-bio{
-    padding:0 15px;
+
+.character-bio {
+  padding: 0 15px;
 }
-.load-more-wrapper{
-    width:100%;
-    display: inherit;
-    justify-content: center;
-    margin:40px 0px;
+
+.load-more-wrapper {
+  width: 100%;
+  display: inherit;
+  justify-content: center;
+  margin: 40px 0px;
 }
-.load-more-wrapper button[type="button"]{
-    border: 1px solid #000;
-    color: #fff;
-    background: #000;
-    font-size: 1.5em;
-    padding: 10px 30px;
-    cursor: pointer;
+
+.load-more-wrapper button[type="button"] {
+  border: 1px solid #000;
+  color: #fff;
+  background: #000;
+  font-size: 1.5em;
+  padding: 10px 30px;
+  cursor: pointer;
 }
+
 .modal {
-  display: block; 
-  position: fixed; 
-  z-index: 1; 
-  padding-top: 100px; 
+  position: fixed;
+  z-index: 1;
+  display: flex;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
+
 .modal-content {
   position: relative;
   background-color: #fefefe;
   margin: auto;
   padding: 25px;
   border: 1px solid #888;
-  max-width: 30%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  max-width: 500px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
 }
-.modal-body{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+
+.modal-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-.modal-image{
-    margin-right: 20px;
+
+.modal-image {
+  margin-right: 20px;
 }
+
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
-  to {top:0; opacity:1}
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
 }
 
 @keyframes animatetop {
-  from {top:-300px; opacity:0}
-  to {top:0; opacity:1}
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
 }
+
+@keyframes animatetopOut {
+  from {
+    top: 0;
+    opacity: 1
+  }
+  to {
+    top: -300px;
+    opacity: 0
+  }
+}
+
 .close {
   color: #000;
   float: right;
@@ -108,31 +145,30 @@ body{
   font-weight: bold;
   position: absolute;
   right: 15px;
-  top:10px;
+  top: 10px;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-@media screen and (max-width:768px){
-    .modal-content {
-        padding:20px;
-        max-width: 80%;
-    }
-    .modal-image{
-      margin-right: 0;
+
+@media screen and (max-width:768px) {
+  .modal-content {
+    padding: 20px;
+    max-width: 80%;
   }
-    .modal-body{
-        flex-direction: column;
-        margin-top:20px;
-    }
+  .modal-image {
+    margin-right: 0;
+  }
+  .modal-body {
+    flex-direction: column;
+    margin-top: 20px;
+  }
 }
-.loading,
-.loading:before,
-.loading:after {
+
+.loading, .loading:before, .loading:after {
   border-radius: 50%;
   width: 2.5em;
   height: 2.5em;
@@ -141,6 +177,7 @@ body{
   -webkit-animation: load7 1.8s infinite ease-in-out;
   animation: load7 1.8s infinite ease-in-out;
 }
+
 .loading {
   color: #000;
   font-size: 10px;
@@ -153,54 +190,77 @@ body{
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
-.loading:before,
-.loading:after {
+
+.loading:before, .loading:after {
   content: '';
   position: absolute;
   top: 0;
 }
+
 .loading:before {
   left: -3.5em;
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
+
 .loading:after {
   left: 3.5em;
 }
+
 @-webkit-keyframes load7 {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
     box-shadow: 0 2.5em 0 0;
   }
 }
+
 @keyframes load7 {
-  0%,
-  80%,
-  100% {
+  0%, 80%, 100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
     box-shadow: 0 2.5em 0 0;
   }
 }
+
 .fade-in {
-    opacity:0;  /* make things invisible upon start */
-    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-    -moz-animation:fadeIn ease-in 1;
-    animation:fadeIn ease-in 1;
-  
-    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-    -moz-animation-fill-mode:forwards;
-    animation-fill-mode:forwards;
-  
-    -webkit-animation-duration:1s;
-    -moz-animation-duration:1s;
-    animation-duration:1s;
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
