@@ -1,10 +1,14 @@
+const URL = 'https://rickandmortyapi.com/api/character/';
+const loadMore = document.getElementById('load-more');
+const body = document.querySelector('body');
+
 const stringToHTML = (s) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(s, "text/html");
     return doc.body.firstChild;
 };
 const addEvents = (selector, id) => {
-    document.querySelector('body').appendChild(selector);
+    body.appendChild(selector);
     window.onclick = function (event) {
         if (event.target === selector || event.target.id === `close-${id}`) {
             selector.querySelector('.modal-content').style.animationName = 'animatetopOut'
@@ -57,28 +61,32 @@ const showCard = (character) => {
 const getData = URL => {
     const loading = document.querySelector('.loading');
     loading.style.display = 'block';
+    body.classList.add('loading-products');
     fetch(URL)
         .then(res => res.json())
         .then(characters => {
             loading.style.display = 'none';
             if (characters.info.next) {
-                document.getElementById('load-more').setAttribute('data-next-url', characters.info.next);
-                document.getElementById('load-more').removeAttribute('disabled')
+                loadMore.setAttribute('data-next-url', characters.info.next);
             }
             characters.results.map(character => {
                 const charactersList = document.querySelector('.characters-wrapper')
                 let renderedCharacters = showCard(character);
                 charactersList.appendChild(renderedCharacters);
-
             })
+            body.classList.remove('loading-products');
         })
+        .finally(() => { body.classList.remove('loading-products'); })
 }
 window.onload = () => {
-    const URL = 'https://rickandmortyapi.com/api/character/';
     getData(URL);
-    document.getElementById('load-more').addEventListener('click', function () {
-        let URL = this.dataset.nextUrl;
-        getData(URL);
-        this.setAttribute('disabled', 'disabled');
+    window.addEventListener('scroll', function (e) {
+        let target = loadMore.getBoundingClientRect().top;
+        if (loadMore && !body.classList.contains('loading-products')) {
+            if (target < (window.innerHeight + 400)) {
+                let URL = loadMore.dataset.nextUrl;
+                getData(URL)
+            }
+        }
     })
 }
