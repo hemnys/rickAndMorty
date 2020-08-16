@@ -1,0 +1,49 @@
+body, html {
+    scroll-behavior: smooth;
+}
+
+.scroll-button {
+    position: fixed;
+    bottom: var(--scroll-bottom);
+    right: var(--scroll-right);
+    border: 0;
+    background: var(--scroll-background);
+    width: var(--scroll-width);
+    height: var(--scroll-height);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity;
+    transition-duration: .8s;
+    transition-timing-function: ease;
+}
+
+.scroll-button:active, .scroll-button:focus {
+    outline: 0;
+}
+
+.shape-rounded {
+    border-radius: 50%;
+}
+
+.scroll-button.scroll-show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.arrow {
+    border: solid var(--scroll-color);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}

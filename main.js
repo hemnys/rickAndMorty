@@ -8,7 +8,7 @@ const stringToHTML = (s) => {
     return doc.body.firstChild;
 };
 const addEvents = (selector, id) => {
-    body.appendChild(selector);
+    document.querySelector('body').appendChild(selector);
     window.onclick = function (event) {
         if (event.target === selector || event.target.id === `close-${id}`) {
             selector.querySelector('.modal-content').style.animationName = 'animatetopOut'
@@ -73,17 +73,20 @@ const getData = URL => {
                 const charactersList = document.querySelector('.characters-wrapper')
                 let renderedCharacters = showCard(character);
                 charactersList.appendChild(renderedCharacters);
+
             })
             body.classList.remove('loading-products');
         })
-        .finally(() => { body.classList.remove('loading-products'); })
+        .finally(()=>{  body.classList.remove('loading-products'); })
 }
 window.onload = () => {
+   
     getData(URL);
-    window.addEventListener('scroll', function (e) {
+ 
+    window.addEventListener('scroll',function(e){
         let target = loadMore.getBoundingClientRect().top;
-        if (loadMore && !body.classList.contains('loading-products')) {
-            if (target < (window.innerHeight + 400)) {
+        if(loadMore && !body.classList.contains('loading-products')){
+            if(target < (window.innerHeight+400)){
                 let URL = loadMore.dataset.nextUrl;
                 getData(URL)
             }
