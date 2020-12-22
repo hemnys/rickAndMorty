@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rick & Morty API</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <script
+      src="https://kit.fontawesome.com/2c36e9b7b1.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="hero">
-            <h1>Rick & Morty API</h1>
-        </div>
-        <div class="characters-wrapper">
+      <div class="hero">
+        <h1>Rick & Morty API</h1>
 
-        </div>
-        <div class="loading">Loading...</div>
-        <div class="load-more-wrapper">
-            <button type="button" class="btn" id="load-more">Load More</button>
-        </div>
+        <button class="switch" id="switch">
+          <span><i class="fas fa-sun"></i></span>
+          <span><i class="fas fa-moon"></i></span>
+        </button>
+      </div>
+      <div class="characters-wrapper"></div>
+      <div class="loading">Loading...</div>
+      <div class="load-more-wrapper">
+        <button type="button" class="btn" id="load-more">Load More</button>
+      </div>
     </div>
-</body>
-<script src="main.js"></script>
-
+  </body>
+  <script src="main.js"></script>
 </html>

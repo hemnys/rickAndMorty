@@ -82,3 +82,32 @@ window.onload = () => {
         this.setAttribute('disabled', 'disabled');
     })
 }
+
+
+//// dark mode
+const btnSwitch = document.querySelector('#switch');
+
+btnSwitch.addEventListener('click', () => {
+    document.body.classList.toggle('Dark')
+    btnSwitch.classList.toggle('active')
+
+    // localStorage
+    document.body.classList.contains('Dark')
+        ?
+        localStorage.setItem('mode', 'true')
+        :
+        localStorage.setItem('mode', 'false')
+
+})
+
+if (localStorage.getItem('mode') === 'true') {
+    document.body.classList.add('Dark')
+    btnSwitch.classList.add('active')
+
+
+}
+else {
+    document.body.classList.remove('Dark')
+    btnSwitch.classList.remove('active')
+
+}
