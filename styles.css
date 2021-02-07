@@ -108,33 +108,33 @@ body {
 @-webkit-keyframes animatetop {
   from {
     top: -300px;
-    opacity: 0
+    opacity: 0;
   }
   to {
     top: 0;
-    opacity: 1
+    opacity: 1;
   }
 }
 
 @keyframes animatetop {
   from {
     top: -300px;
-    opacity: 0
+    opacity: 0;
   }
   to {
     top: 0;
-    opacity: 1
+    opacity: 1;
   }
 }
 
 @keyframes animatetopOut {
   from {
     top: 0;
-    opacity: 1
+    opacity: 1;
   }
   to {
     top: -300px;
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -148,13 +148,14 @@ body {
   top: 10px;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   .modal-content {
     padding: 20px;
     max-width: 80%;
@@ -168,7 +169,9 @@ body {
   }
 }
 
-.loading, .loading:before, .loading:after {
+.loading,
+.loading:before,
+.loading:after {
   border-radius: 50%;
   width: 2.5em;
   height: 2.5em;
@@ -191,8 +194,9 @@ body {
   animation-delay: -0.16s;
 }
 
-.loading:before, .loading:after {
-  content: '';
+.loading:before,
+.loading:after {
+  content: "";
   position: absolute;
   top: 0;
 }
@@ -208,7 +212,9 @@ body {
 }
 
 @-webkit-keyframes load7 {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
@@ -217,7 +223,9 @@ body {
 }
 
 @keyframes load7 {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     box-shadow: 0 2.5em 0 -1.3em;
   }
   40% {
