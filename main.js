@@ -1,22 +1,27 @@
+const URL = "https://rickandmortyapi.com/api/character/";
+const $loadMoreButton = document.getElementById("load-more"),
+  $loading = document.querySelector(".loading"),
+  $charactersList = document.querySelector(".characters-wrapper"),
+  $body = document.querySelector("body");
+
 const stringToHTML = (s) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(s, "text/html");
   return doc.body.firstChild;
 };
 const addEvents = (selector, id) => {
-  document.querySelector("body").appendChild(selector);
-  window.onclick = function (event) {
+  $body.appendChild(selector);
+  window.addEventListener("click", (event) => {
     if (event.target === selector || event.target.id === `close-${id}`) {
       selector.querySelector(".modal-content").style.animationName =
         "animatetopOut";
       setTimeout(() => {
-        document.querySelector("body").removeChild(selector);
+        $body.removeChild(selector);
       }, 200);
     }
-  };
+  });
 };
-const showModal = (character) => {
-  const { name, id, image, status, species, gender, origin } = character;
+const showModal = ({ name, id, image, status, species, gender, origin }) => {
   let template = `
     <div id="myModal-${id}" class="modal">
       <div class="modal-content">
@@ -40,7 +45,7 @@ const showModal = (character) => {
   addEvents(renderedModal, id);
 };
 const showCard = (character) => {
-  const { name, id, image } = character;
+  const { id, image, name } = character;
   let template = `
         <div class="character fade-in" data-id="${id}">
             <div class="character-image-wrapper">
@@ -58,31 +63,20 @@ const showCard = (character) => {
   return renderedCharacter;
 };
 const getData = (URL) => {
-  const loading = document.querySelector(".loading");
-  loading.style.display = "block";
+  $loading.style.display = "block";
   fetch(URL)
     .then((res) => res.json())
-    .then((characters) => {
-      loading.style.display = "none";
-      if (characters.info.next) {
-        document
-          .getElementById("load-more")
-          .setAttribute("data-next-url", characters.info.next);
-        document.getElementById("load-more").removeAttribute("disabled");
-      }
-      characters.results.map((character) => {
-        const charactersList = document.querySelector(".characters-wrapper");
-        let renderedCharacters = showCard(character);
-        charactersList.appendChild(renderedCharacters);
-      });
+    .then(({ info: { next }, results }) => {
+      $loading.style.display = "none";
+      $loadMoreButton.dataset.nextUrl = next ? next : "";
+      let charactersElements = results.map((result) => showCard(result));
+      $charactersList.append(...charactersElements);
     });
 };
-window.onload = () => {
-  const URL = "https://rickandmortyapi.com/api/character/";
+window.addEventListener("DOMContentLoaded", function () {
   getData(URL);
-  document.getElementById("load-more").addEventListener("click", function () {
+  $loadMoreButton.addEventListener("click", function () {
     let URL = this.dataset.nextUrl;
     getData(URL);
-    this.setAttribute("disabled", "disabled");
   });
-};
+});
