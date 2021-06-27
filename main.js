@@ -74,10 +74,10 @@ const getData = (URL) => {
     });
 };
 
-function clickNext() {
-  let URL = this.dataset.nextUrl;
+const clickNext = (evt) => {
+  let URL = evt.target.dataset.nextUrl;
   getData(URL);
-}
+};
 window.addEventListener("DOMContentLoaded", function () {
   getData(URL);
   $loadMoreButton.addEventListener("click", clickNext);
