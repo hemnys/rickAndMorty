@@ -73,10 +73,12 @@ const getData = (URL) => {
       $charactersList.append(...charactersElements);
     });
 };
+
+function clickNext() {
+  let URL = this.dataset.nextUrl;
+  getData(URL);
+}
 window.addEventListener("DOMContentLoaded", function () {
   getData(URL);
-  $loadMoreButton.addEventListener("click", function () {
-    let URL = this.dataset.nextUrl;
-    getData(URL);
-  });
+  $loadMoreButton.addEventListener("click", clickNext);
 });
